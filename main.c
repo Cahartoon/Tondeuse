@@ -6,10 +6,15 @@
 /*   By: edinguim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 10:09:24 by edinguim          #+#    #+#             */
-/*   Updated: 2018/12/07 12:43:26 by edinguim         ###   ########.fr       */
+/*   Updated: 2018/12/07 12:55:49 by edinguim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*Toutes les fonction commencant par ft_ ainsique get_next_line sont dans */
+/*le dossier libft, qui est ma librairie de fonctions*/
+/*open et close sont des fonctions native du C*/
+
+/*inclue le fichier tondeuse.h qui contient la description des structures*/
 #include "tondeuse.h"
 
 /*Fonction qui identifie si la ligne correspond a la pelouse*/
@@ -79,6 +84,7 @@ void	init_lawn(t_lawn *lawn)
 /*Fonction qui met a jour la pelouse*/
 void	update_lawn(t_lawn *lawn, char *line)
 {
+	/*ft_atoi sert a transformer un char en int*/
 	lawn->x = ft_atoi(line);
 	while (*line != ' ')
 		line++;
@@ -175,12 +181,16 @@ void	read_instruction(char *file)
 	int			i;
 	int			fd;
 
+	/*malloc sert a definir l'espace memoire necessaire a la structure*/
 	lawn = (t_lawn*)malloc(sizeof(t_lawn));
 	mower = (t_mower*)malloc(sizeof(t_mower));
 	init_lawn(lawn);
 	init_mower(mower);
+	/*open ouvre le ficher file dans un file director indexe par fd*/
 	fd = open(file, O_RDONLY);
 	i = 1;
+	/*get_next_line lit le fichier ligne par ligne et stock ce au'elle a lu*/
+	/*dans line, renvoie 0 lorsque qu'elle a fini la lecture*/
 	while (get_next_line(fd, &line))
 	{
 		if (is_lawn(line))
@@ -193,6 +203,7 @@ void	read_instruction(char *file)
 		else if (is_move(line))
 			move_mower(lawn, mower, line);
 	}
+	/*close ferme le file director*/
 	close(fd);
 }
 
