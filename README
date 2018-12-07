@@ -1,0 +1,3 @@
+Une fois le programme compile, il s'excecute de la manier suivante :
+./a.out file.txt
+j'ai pas gere les fuites memoires, ni les cas d'erreurs mais tu t'en sortira j'en suis sur ;)
