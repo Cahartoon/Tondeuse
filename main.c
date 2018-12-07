@@ -6,7 +6,7 @@
 /*   By: edinguim <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 10:09:24 by edinguim          #+#    #+#             */
-/*   Updated: 2018/12/07 12:31:31 by edinguim         ###   ########.fr       */
+/*   Updated: 2018/12/07 12:43:26 by edinguim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,14 @@ int		is_move(char *s)
 	return (1);
 }
 
+/*Fonction qui initialise la stucture pelouse*/
 void	init_lawn(t_lawn *lawn)
 {
 	lawn->x = 0;
 	lawn->y = 0;
 }
 
+/*Fonction qui met a jour la pelouse*/
 void	update_lawn(t_lawn *lawn, char *line)
 {
 	lawn->x = ft_atoi(line);
@@ -83,6 +85,7 @@ void	update_lawn(t_lawn *lawn, char *line)
 	lawn->y = ft_atoi(line);
 }
 
+/*Fonction qui initialise la structure tondeuse*/
 void	init_mower(t_mower *mower)
 {
 	mower->name = 0;
@@ -91,6 +94,7 @@ void	init_mower(t_mower *mower)
 	mower->orientation = 'A';
 }
 
+/*Fonction qui met a jour la tondeuse*/
 void	update_mower(t_mower *mower, int i, char *line)
 {
 	mower->name = i;
@@ -105,6 +109,7 @@ void	update_mower(t_mower *mower, int i, char *line)
 	mower->orientation = *line;
 }
 
+/*Fonction qui met a jour l'orientation de la tondeuse*/
 void	update_orientation(t_mower *mower, char c)
 {
 	if (c == 'D')
@@ -131,6 +136,7 @@ void	update_orientation(t_mower *mower, char c)
 	}
 }
 
+/*Fonction qui fait avancer la tondeuse*/
 void	moving_forward(t_lawn *lawn, t_mower *mower)
 {
 	if (mower->orientation == 'N' && mower->y < lawn->y)
@@ -143,6 +149,7 @@ void	moving_forward(t_lawn *lawn, t_mower *mower)
 		mower->x = mower->x - 1;
 }
 
+/*Fonction qui met a jour l'orientation/ fait avancer la tondeuse*/
 void	move_mower(t_lawn *lawn, t_mower *mower, char *line)
 {
 	int		i;
@@ -159,7 +166,7 @@ void	move_mower(t_lawn *lawn, t_mower *mower, char *line)
 	ft_printf("Tondeuse %i : %i %i %c\n", mower->name, mower->x, mower->y,
 			mower->orientation);
 }
-/*Fonction qui lit sur l'entree standard les instructions*/
+/*Fonction qui lit les instructions dans le fichier passe en parametre*/
 void	read_instruction(char *file)
 {
 	t_lawn		*lawn;
